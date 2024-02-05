@@ -61,7 +61,8 @@ const SlotForm = () => {
 
   const fetchSlots = async (day) => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/getSlots?day=${day}`);
+      const response = await axios.get(`http://localhost:4000/api/slots?day=${day}`);
+      console.log("slots data", response.data)
       setSlots(response.data || []);
     } catch (error) {
       console.error('Error fetching slots:', error);
@@ -111,7 +112,7 @@ const SlotForm = () => {
     };
     try {
       console.log(dataToSubmit)
-      const response = await axios.post('http://localhost:4000/api/sendData', dataToSubmit);
+      const response = await axios.post('http://localhost:4000/api/book', dataToSubmit);
       console.log(response.data);
 
       if (response.data && response.data.error === 50001) {
@@ -130,7 +131,7 @@ const SlotForm = () => {
     let message = '';
     switch(formStatus) {
       case 'success':
-        message = 'Form successfully saved';
+        message = 'You will recieve an email confirmation';
         break;
       case 'slotFilled':
         message = 'Sorry, the slot is filled';
@@ -183,7 +184,7 @@ const SlotForm = () => {
                   onChange={() => handleSlotChange(slot.id)}
                 />
                 <label className="form-check-label" htmlFor={`slot${slot.id}`}>
-                  {moment(slot.startTime, 'HH:mm').format('hh:mm A')} - {moment(slot.endTime, 'HH:mm').format('hh:mm A')}
+                  {moment(slot.start_time, 'HH:mm:ss').format('hh:mm A')} - {moment(slot.end_time, 'HH:mm:ss').format('hh:mm A')}
                 </label>
               </div>
             ))}
