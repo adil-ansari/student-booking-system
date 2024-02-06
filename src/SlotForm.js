@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import './SlotBookingForm.css';
+
 
 const SlotForm = () => {
   const [step, setStep] = useState(1);
@@ -158,130 +160,133 @@ const SlotForm = () => {
 
   return (
     <div className="container mt-3">
-      {step === 1 && (
-        <>
-          <div className="btn-group" role="group" aria-label="Basic example">
-            {['M', 'T', 'Th'].map(day => (
-              <button
-                key={day}
-                type="button"
-                className={`btn ${selectedDay === day ? 'btn-primary' : 'btn-outline-primary'}`}
-                onClick={() => handleDayChange(day)}>
-                {day}
-              </button>
-            ))}
-          </div>
-          <form className="mt-3">
-            {slots.map(slot => (
-              <div className="form-check" key={slot.id}>
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="slot"
-                  id={`slot${slot.id}`}
-                  value={slot.id}
-                  checked={selectedSlot === slot.id}
-                  onChange={() => handleSlotChange(slot.id)}
-                />
-                <label className="form-check-label" htmlFor={`slot${slot.id}`}>
-                  {moment(slot.start_time, 'HH:mm:ss').format('hh:mm A')} - {moment(slot.end_time, 'HH:mm:ss').format('hh:mm A')}
-                </label>
+      <div className="form-container">
+      <h2 className="form-heading">CSSL Tutor - Slot Booking</h2>
+        {step === 1 && (
+          <>
+            <div className="btn-group" role="group" aria-label="Basic example">
+              {['M', 'T', 'Th'].map(day => (
+                <button
+                  key={day}
+                  type="button"
+                  className={`btn ${selectedDay === day ? 'btn-primary' : 'btn-outline-primary'}`}
+                  onClick={() => handleDayChange(day)}>
+                  {day}
+                </button>
+              ))}
+            </div>
+            <form className="mt-3">
+              {slots.map(slot => (
+                <div className="form-check" key={slot.id}>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="slot"
+                    id={`slot${slot.id}`}
+                    value={slot.id}
+                    checked={selectedSlot === slot.id}
+                    onChange={() => handleSlotChange(slot.id)}
+                  />
+                  <label className="form-check-label" htmlFor={`slot${slot.id}`}>
+                    {moment(slot.start_time, 'HH:mm:ss').format('hh:mm A')} - {moment(slot.end_time, 'HH:mm:ss').format('hh:mm A')}
+                  </label>
+                </div>
+              ))}
+              <button type="button" className="btn btn-secondary mt-3" onClick={handleNext}>Next</button>
+            </form>
+          </>
+        )}
+
+        {step === 2 && (
+          <form onSubmit={handleSubmit}>
+              <div class="form-group">
+                  <label>Session Type *</label>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="sessionType" id="walkIn" value="Walk-in" onChange={handleChange}/>
+                      <label class="form-check-label" for="walkIn">Walk-in</label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="sessionType" id="appointment" value="Appointment" onChange={handleChange}/>
+                      <label class="form-check-label" for="appointment">Appointment</label>
+                  </div>
               </div>
-            ))}
-            <button type="button" className="btn btn-secondary mt-3" onClick={handleNext}>Next</button>
+
+              <div class="form-group">
+                  <label for="studentName">Student Name *</label>
+                  <input type="text" class="form-control" id="studentName" name="studentName" required onChange={handleChange}/>
+              </div>
+
+              <div class="form-group">
+                  <label for="studentEmail">Student Email *</label>
+                  <input type="email" class="form-control" id="studentEmail" name="studentEmail" placeholder="Please enter your .sjsu email" required onChange={handleChange}/>
+              </div>
+
+              <div class="form-group">
+                  <label>Student Major *</label>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="studentMajor" id="cs" value="CS" onChange={handleChange}/>
+                      <label class="form-check-label" for="cs">CS</label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="studentMajor" id="se" value="SE" onChange={handleChange}/>
+                      <label class="form-check-label" for="se">SE</label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="studentMajor" id="ds" value="DS" onChange={handleChange}/>
+                      <label class="form-check-label" for="ds">DS</label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="studentMajor" id="undeclared" value="Undeclared" onChange={handleChange}/>
+                      <label class="form-check-label" for="undeclared">Undeclared</label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="studentMajor" id="otherMajor" value="Other" onChange={handleChange}/>
+                      <label class="form-check-label" for="otherMajor">Other</label>
+                      <input type="text" class="form-control" id="otherMajorText" name="studentMajorOther" onChange={handleChange}/>
+                  </div>
+              </div>
+
+
+              <div class="form-group">
+                  <label>Course Number *</label>
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="courseNumber" id="cs46a" value="CS46A" onChange={handleChange}/>
+                      <label class="form-check-label" for="cs46a">CS46A</label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="courseNumber" id="cs46b" value="CS46B" onChange={handleChange}/>
+                      <label class="form-check-label" for="cs46b">CS46B</label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="courseNumber" id="cs131" value="CS131" onChange={handleChange}/>
+                      <label class="form-check-label" for="cs131">CS131</label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="courseNumber" id="cs146" value="CS146" onChange={handleChange}/>
+                      <label class="form-check-label" for="cs146">CS146</label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="courseNumber" id="cs151" value="CS151" onChange={handleChange} />
+                      <label class="form-check-label" for="cs151">CS151</label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="courseNumber" id="otherCourse" value="Other" onChange={handleOtherCourseChange}/>
+                      <label class="form-check-label" for="other">Other</label>
+                  </div>
+                  <input type="text" class="form-control mt-2" id="otherCourseDetails" name="otherCourseDetails" placeholder="Enter additional details" disabled={!isOtherCourseChecked}  onChange={handleChange}/>
+              </div>
+
+
+              {/* <div class="form-group">
+                  <label for="startingTime">Starting Time *</label>
+                  <input type="time" class="form-control" id="startingTime" name="startingTime" required/>
+              </div> */}
+              
+              <button type="button" className="btn btn-secondary mt-3 mr-2" onClick={handlePrevious}>Previous</button>
+              <input type="submit" value="Submit" className="btn btn-primary mt-3" />
           </form>
-        </>
-      )}
-
-      {step === 2 && (
-        <form onSubmit={handleSubmit}>
-            <div class="form-group">
-                <label>Session Type *</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="sessionType" id="walkIn" value="Walk-in" onChange={handleChange}/>
-                    <label class="form-check-label" for="walkIn">Walk-in</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="sessionType" id="appointment" value="Appointment" onChange={handleChange}/>
-                    <label class="form-check-label" for="appointment">Appointment</label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="studentName">Student Name *</label>
-                <input type="text" class="form-control" id="studentName" name="studentName" required onChange={handleChange}/>
-            </div>
-
-            <div class="form-group">
-                <label for="studentEmail">Student Email *</label>
-                <input type="email" class="form-control" id="studentEmail" name="studentEmail" placeholder="Please enter your .sjsu email" required onChange={handleChange}/>
-            </div>
-
-            <div class="form-group">
-                <label>Student Major *</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="studentMajor" id="cs" value="CS" onChange={handleChange}/>
-                    <label class="form-check-label" for="cs">CS</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="studentMajor" id="se" value="SE" onChange={handleChange}/>
-                    <label class="form-check-label" for="se">SE</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="studentMajor" id="ds" value="DS" onChange={handleChange}/>
-                    <label class="form-check-label" for="ds">DS</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="studentMajor" id="undeclared" value="Undeclared" onChange={handleChange}/>
-                    <label class="form-check-label" for="undeclared">Undeclared</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="studentMajor" id="otherMajor" value="Other" onChange={handleChange}/>
-                    <label class="form-check-label" for="otherMajor">Other</label>
-                    <input type="text" class="form-control" id="otherMajorText" name="studentMajorOther" onChange={handleChange}/>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <label>Course Number *</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="courseNumber" id="cs46a" value="CS46A" onChange={handleChange}/>
-                    <label class="form-check-label" for="cs46a">CS46A</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="courseNumber" id="cs46b" value="CS46B" onChange={handleChange}/>
-                    <label class="form-check-label" for="cs46b">CS46B</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="courseNumber" id="cs131" value="CS131" onChange={handleChange}/>
-                    <label class="form-check-label" for="cs131">CS131</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="courseNumber" id="cs146" value="CS146" onChange={handleChange}/>
-                    <label class="form-check-label" for="cs146">CS146</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="courseNumber" id="cs151" value="CS151" onChange={handleChange} />
-                    <label class="form-check-label" for="cs151">CS151</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="courseNumber" id="otherCourse" value="Other" onChange={handleOtherCourseChange}/>
-                    <label class="form-check-label" for="other">Other</label>
-                </div>
-                <input type="text" class="form-control mt-2" id="otherCourseDetails" name="otherCourseDetails" placeholder="Enter additional details" disabled={!isOtherCourseChecked}  onChange={handleChange}/>
-            </div>
-
-
-            {/* <div class="form-group">
-                <label for="startingTime">Starting Time *</label>
-                <input type="time" class="form-control" id="startingTime" name="startingTime" required/>
-            </div> */}
-            
-            <button type="button" className="btn btn-secondary mt-3 mr-2" onClick={handlePrevious}>Previous</button>
-            <input type="submit" value="Submit" className="btn btn-primary mt-3" />
-        </form>
-      )}
+        )}
+      </div>
     </div>
   );
 };

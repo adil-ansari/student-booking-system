@@ -1,0 +1,38 @@
+/* Add this to your container to center the form container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust or remove height as needed */
+    padding: 20px; /* Add padding to ensure some space around the form container */
+  }
+  
+  /* Update your form-container styles */
+  .form-container {
+    background-color: #fff;
+    padding: 40px; /* Increased padding for internal spacing */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure it takes the parent width */
+    max-width: 600px; /* Max width for the form */
+    margin: auto; /* Add auto margin to center align the form container */
+  }
+  
+  .form-heading {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .form-check-label {
+    margin-left: 5px;
+  }
+  
+  .form-group, .btn-group {
+    margin-bottom: 15px;
+  }
+  
+  .btn-secondary {
+    margin-right: 10px;
+  }
+  
