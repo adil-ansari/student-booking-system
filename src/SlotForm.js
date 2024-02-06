@@ -147,8 +147,10 @@ const SlotForm = () => {
 
     return (
       <div className="container mt-3">
-        <div className="alert alert-info">{message}</div>
-        <button className="btn btn-primary" onClick={resetForm}>Start Over</button>
+        <div class="form-group">
+          <div className="alert alert-info">{message}</div>
+          <button className="btn btn-primary form-button" onClick={resetForm}>Start Over</button>
+        </div>
       </div>
     );
   };
@@ -192,7 +194,7 @@ const SlotForm = () => {
                   </label>
                 </div>
               ))}
-              <button type="button" className="btn btn-secondary mt-3" onClick={handleNext}>Next</button>
+              <button type="button" className="btn btn-secondary next-button" onClick={handleNext}>Next</button>
             </form>
           </>
         )}
@@ -282,8 +284,8 @@ const SlotForm = () => {
                   <input type="time" class="form-control" id="startingTime" name="startingTime" required/>
               </div> */}
               
-              <button type="button" className="btn btn-secondary mt-3 mr-2" onClick={handlePrevious}>Previous</button>
-              <input type="submit" value="Submit" className="btn btn-primary mt-3" />
+              <button type="button" className="btn btn-secondary next-button" onClick={handlePrevious}>Previous</button>
+              <input type="submit" value="Submit" className="btn btn-primary form-button" />
           </form>
         )}
       </div>

@@ -35,4 +35,29 @@
   .btn-secondary {
     margin-right: 10px;
   }
+
+  .btn-group {
+    display: flex;
+    justify-content: space-between; /* Distribute space between buttons */
+    width: 100%; /* Ensure the group takes full width of its parent */
+  }
   
+  .btn-group .btn {
+    flex-grow: 1; /* Grow to fill the container */
+    text-align: center; /* Center the text inside buttons */
+    margin: 0 2px; /* Space between buttons, adjust as needed */
+  }
+  
+
+  .form-button {
+    width: 100%; /* Stretch to the full width of its parent */
+    padding: 10px; /* Adjust padding for better sizing, increase if you want bigger buttons */
+    margin-bottom: 15px;
+  }
+
+  .next-button {
+    width: 100%; /* Stretch to the full width of its parent */
+    padding: 10px; /* Adjust padding for better sizing, increase if you want bigger buttons */
+    margin-bottom: 5px;
+    margin-top: 20px;
+  }
