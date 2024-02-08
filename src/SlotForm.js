@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import { useAuth } from './AuthContext';
 import './SlotBookingForm.css';
 
 
 const SlotForm = () => {
+  const { user } = useAuth(); // Destructure to get the user object
+
   const [step, setStep] = useState(1);
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [slots, setSlots] = useState([]);
   const [formData, setFormData] = useState({
-    sessionType: '',
+    sessionType: "Appointment",
     studentName: '',
-    studentEmail: '',
+    studentEmail: user.email,
     studentMajor: '',
     courseNumber: [],
     // startingTime: ''
@@ -20,15 +23,17 @@ const SlotForm = () => {
   const [formStatus, setFormStatus] = useState(''); // 'success', 'slotFilled', 'error'
   const [errorMessage, setErrorMessage] = useState('');
 
+
+
   const resetForm = () => {
     setStep(1);
     setSelectedDay('');
     setSelectedSlot(null);
     setSlots([]);
     setFormData({
-      sessionType: '',
-      studentName: '',
-      studentEmail: '',
+      sessionType: "Appointment",
+      studentName: user.name,
+      studentEmail: user.email,
       studentMajor: '',
       courseNumber: [],
       // startingTime: ''
@@ -37,8 +42,6 @@ const SlotForm = () => {
     setFormStatus('');
     setErrorMessage('');
   };
-
-
 
   const [isOtherCourseChecked, setIsOtherCourseChecked] = useState(false);
 
@@ -119,6 +122,7 @@ const SlotForm = () => {
 
       if (response.data && response.data.error === 50001) {
         setFormStatus('slotFilled');
+        setErrorMessage(response.data?.message)
       } else {
         setFormStatus('success');
       }
@@ -133,10 +137,10 @@ const SlotForm = () => {
     let message = '';
     switch(formStatus) {
       case 'success':
-        message = 'You will recieve an email confirmation';
+        message = 'You will receive an email confirmation';
         break;
       case 'slotFilled':
-        message = 'Sorry, the slot is filled';
+        message = errorMessage;
         break;
       case 'error':
         message = errorMessage;
@@ -201,26 +205,15 @@ const SlotForm = () => {
 
         {step === 2 && (
           <form onSubmit={handleSubmit}>
-              <div class="form-group">
-                  <label>Session Type *</label>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="sessionType" id="walkIn" value="Walk-in" onChange={handleChange}/>
-                      <label class="form-check-label" for="walkIn">Walk-in</label>
-                  </div>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="sessionType" id="appointment" value="Appointment" onChange={handleChange}/>
-                      <label class="form-check-label" for="appointment">Appointment</label>
-                  </div>
-              </div>
 
               <div class="form-group">
                   <label for="studentName">Student Name *</label>
-                  <input type="text" class="form-control" id="studentName" name="studentName" required onChange={handleChange}/>
+                  <input type="text" class="form-control" id="studentName" name="studentName" required value = {user.name} disabled = {true}/>
               </div>
 
               <div class="form-group">
                   <label for="studentEmail">Student Email *</label>
-                  <input type="email" class="form-control" id="studentEmail" name="studentEmail" placeholder="Please enter your .sjsu email" required onChange={handleChange}/>
+                  <input type="email" class="form-control" id="studentEmail" name="studentEmail" required value = {user.email} disabled = {true}/>
               </div>
 
               <div class="form-group">
