@@ -1,0 +1,50 @@
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    background-color: #f0f2f5; /* Light background color */
+  }
+  
+  .content-box {
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center the content */
+    width: 100%;
+    max-width: 600px; /* Maximum width with centering */
+  }
+  
+  h2 {
+    margin-bottom: 20px; /* Space between the heading and the button */
+    color: #333; /* Dark text color for contrast */
+  }
+  
+  .google-signin-btn {
+    background-color: #4285F4; /* Google's brand blue */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; /* Space between the icon and text */
+    text-decoration: none; /* Remove underline from links if used as <a> */
+  }
+  
+  .google-logo {
+    width: 24px; /* Adjust size of Google logo */
+    height: auto;
+  }
+  
+  .google-signin-btn:hover {
+    background-color: #357ae8; /* Slightly darker shade on hover */
+  }
+  
+  .google-signin-btn:focus {
+    outline: none;
+  }
+  
