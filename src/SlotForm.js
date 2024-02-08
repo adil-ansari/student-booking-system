@@ -63,7 +63,7 @@ const SlotForm = () => {
 
   const fetchSlots = async (day) => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/slots?day=${day}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_HOST}/api/slots?day=${day}`);
       console.log("slots data", response.data)
       setSlots(response.data || []);
     } catch (error) {
@@ -114,7 +114,7 @@ const SlotForm = () => {
     };
     try {
       console.log(dataToSubmit)
-      const response = await axios.post('http://localhost:4000/api/book', dataToSubmit);
+      const response = await axios.post(`${process.env.REACT_APP_API_HOST}/api/book`, dataToSubmit);
       console.log(response.data);
 
       if (response.data && response.data.error === 50001) {
