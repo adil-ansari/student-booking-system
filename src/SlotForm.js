@@ -14,7 +14,7 @@ const SlotForm = () => {
   const [slots, setSlots] = useState([]);
   const [formData, setFormData] = useState({
     sessionType: "Appointment",
-    studentName: '',
+    studentName: user.name,
     studentEmail: user.email,
     studentMajor: '',
     courseNumber: [],
