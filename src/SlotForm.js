@@ -52,11 +52,11 @@ const SlotForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_HOST}/api/date`);
+        const response = await axios.get(`${process.env.REACT_APP_API_HOST}/api/dates`);
         setM(response.data.M);
         setT(response.data.T);
         setTh(response.data.Th);
-        setSelectedDay(response.data.M); // Default selected day to M
+        setSelectedDay('M'); // Default selected day to M
         setLoading(false);
       } catch (error) {
         console.error('Error fetching dates:', error);
@@ -188,7 +188,7 @@ const SlotForm = () => {
   return (
     <div className="container mt-3">
       { loading ? (
-        <div>Loading .....</div>
+          <div className="loader"></div>
       ) : (
         <div className="form-container">
         <h2 className="form-heading">CSSL Tutor - Slot Booking</h2>
