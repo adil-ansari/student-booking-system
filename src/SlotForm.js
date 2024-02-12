@@ -205,6 +205,9 @@ const SlotForm = () => {
                   </button>
                 ))}
               </div>
+              {slots.length === 0 && (
+                <p>No Slots for this day</p>
+              )}
               <form className="mt-3">
                 {slots.map(slot => (
                   <div className="form-check" key={slot.id}>
